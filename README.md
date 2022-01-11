@@ -1,9 +1,11 @@
 Installs:
-```commandline
+```sh
 pip install opentelemetry-exporter-otlp
 pip install opentelemetry-api
 pip install opentelemetry-sdk
 pip install opentelemetry-instrumentation-celery
+pip install redis
+# optional if not installed - pip install celery
 ```
 
 # Sample task file
@@ -28,5 +30,12 @@ Also, replace OTEL_SERVICE_NAME with the relevant service name
 Also, replace the word task after celery -A with the file name that contains your celery task. same as 
 ```commandline
 OTEL_SERVICE_NAME=service-name OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=https://otelcol.aspecto.io:4317 OTEL_EXPORTER_OTLP_HEADERS=Authorization=aspecto-token celery -A task worker -l INFO --concurrency=1
+```
+
+If you encounter encoding issues: this is the solution(launch in current shell):
+https://stackoverflow.com/questions/36651680/click-will-abort-further-execution-because-python-3-was-configured-to-use-ascii
+```sh
+export LC_ALL=de_DE.utf-8
+export LANG=de_DE.utf-8
 ```
 
